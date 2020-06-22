@@ -1,0 +1,194 @@
+'VBA Class - Default - cLog
+'Module Created by Warren Wamba 
+'20/09/2020
+
+
+'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+'X
+'X     Class Module for Defining the Log
+'X
+'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+'---
+Option Explicit
+Option Base 0
+
+'.................................................................................
+'.     Class Module Attributes definition
+'.................................................................................
+
+'---
+Private mTime As String
+Private mProcessor As String
+Private mEngine As String
+Private mTask As String
+Private mDescription As String
+Private mStopWatch As New cWatch
+
+'.................................................................................
+'.     Class Module Property Get definition
+'.................................................................................
+
+'---
+Property Get Time()
+    Time = mTime
+End Property
+
+'---
+Property Get Processor()
+    Processor = mProcessor
+End Property
+
+'---
+Property Get Engine()
+    Engine = mEngine
+End Property
+
+'---
+Property Get Task()
+    Task = mTask
+End Property
+
+'---
+Property Get Description()
+    Description = mDescription
+End Property
+
+'---
+Property Get StopWatch()
+    Set StopWatch = mStopWatch
+End Property
+
+
+'.................................................................................
+'.     Class Module Property Let definition
+'.................................................................................
+
+'---
+Property Let Time(vTime)
+    mTime = vTime
+End Property
+
+'---
+Property Let Processor(vProcessor)
+    mProcessor = vProcessor
+End Property
+
+'---
+Property Let Engine(vEngine)
+    mEngine = vEngine
+End Property
+
+'---
+Property Let Task(vTask)
+    mTask = vTask
+End Property
+
+'---
+Property Let Description(vDescription)
+    mDescription = vDescription
+End Property
+
+'---
+Property Let StopWatch(vStopWatch)
+    Set mStopWatch = vStopWatch
+End Property
+
+'---
+Friend Sub Init_Log(vProcessor As String, vEngine As String, vTask As String, vDesc As String)
+    mTime = "00:00:00"
+    mProcessor = vProcessor
+    mEngine = vEngine
+    mTask = vTask
+    mDescription = vDesc
+    Call mStopWatch.Start_Timer
+End Sub
+
+
+'---
+Friend Sub Update_Log(vProcessor As String, vEngine As String, vTask As String, vDesc As String)
+    mTime = strDblToString(mStopWatch.Elapsed_Time())
+    mProcessor = vProcessor
+    mEngine = vEngine
+    mTask = vTask
+    mDescription = vDesc
+    'mStopWatch             ' no update require
+End Sub
+
+'---
+Friend Sub Close_Log(vProcessor As String, vEngine As String, vTask As String, vDesc As String)
+    mTime = strDblToString(mStopWatch.Elapsed_Time())
+    mProcessor = vProcessor
+    mEngine = vEngine
+    mTask = vTask
+    mDescription = vDesc
+    Call mStopWatch.Stop_Timer
+    Call mStopWatch.Reset_Timer
+End Sub
+
+'---
+
+Friend Sub Set_Log(tLog As cLog)
+    Dim myWatch As New cWatch
+    
+    Set myWatch = Me.StopWatch()
+
+    Me.Time() = tLog.Time()
+    Me.Processor() = tLog.Processor()
+    Me.Engine() = tLog.Engine()
+    Me.Task() = tLog.Task()
+    Me.Description() = tLog.Description()
+    Call myWatch.Watch_Set(tLog.StopWatch())
+    
+    'Set myWatch = Nothing
+End Sub
+
+'.................................................................................
+'.     Class Module Initialisation definition
+'.................................................................................
+
+'---
+'---
+Private Sub Class_Initialize()
+    mTime = "00:00:00"
+    mProcessor = "0atlcx00"
+    mEngine = "DEFAULT_ENGINE"
+    mTask = "LOG_ENG_INIT"
+    mDescription = "LOADING_LOG_CONFIG..."
+    Set mStopWatch = New cWatch
+End Sub
+
+'.................................................................................
+'.     Class Module Functions definition
+'.................................................................................
+
+'---
+Private Function strDblToString(dblSeconds As Double) As String
+ 
+    Dim hours           As Long
+    Dim minutes         As Long
+    Dim seconds         As Long
+    Dim dUsedSeconds    As Long
+ 
+    Dim sHours          As String
+    Dim sMinutes        As String
+    Dim sSeconds        As String
+ 
+    dUsedSeconds = CLng(dblSeconds)
+ 
+    hours = Int(dUsedSeconds / 3600)
+    minutes = Int((dUsedSeconds Mod 3600) / 60)
+    seconds = Int((dUsedSeconds Mod 3600) Mod 60)
+ 
+    sHours = Format(hours, "00")
+    sMinutes = Format(minutes, "00")
+    sSeconds = Format(seconds, "00")
+ 
+    strDblToString = sHours & ":" & sMinutes & ":" & sSeconds
+ 
+End Function
+
+'---
+Private Sub Class_Terminate()
+    Set mStopWatch = Nothing
+End Sub

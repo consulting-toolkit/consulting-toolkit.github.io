@@ -1,0 +1,30 @@
+'VBA Implementation - Default - cLog
+'Module Created by Warren Wamba 
+'20/09/2020
+
+
+'---
+Sub Application_Warm_Up_Environement(ByRef app_progress_bar As ProgressBar)
+    Call aTask_Log_Update("0atlcx03", "MAIN_ENGINE", "START_WARM_UP", "STARTING_WARM_UP...")
+    '---
+    Call SetDefault_InstSrc                 ' setting up config string
+    Call Application_Load_Environment       ' load envi
+    '---
+    Call aTask_Log_Update("0atlcx04", "MAIN_ENGINE", "TERMINATE_WARM_UP", "ENDING_WARM_UP...")
+    app_progress_bar.NextAction "Application Engine Warm-up..." & 3, True 'First method for animating the bar
+    'Call aTask_Print_Log_Info
+End Sub
+
+'XXX aTask - Terminate Tasks
+    Call Application_Build_Log_Info(rngMain_bRng_Valid_Log_Output.value)
+
+
+
+Sub Application_Build_Log_Info(Optional strLogReportMethod As String = "DEFAULT")
+    Select Case strLogReportMethod
+        Case "DEFAULT"
+            Call aTask_Print_Log_Info(False)
+        Case "DUMP_TEXT_FILE"
+            Call aTask_Print_Log_Info(True)
+    End Select
+End Sub

@@ -1,0 +1,107 @@
+'VBA Class - Default - cWatch
+'Module Created by Warren Wamba 
+'20/09/2020
+
+'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+'X
+'X     Class Module for Defining the Stop Watch
+'X
+'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+'---
+Option Explicit
+Option Base 0
+
+'.................................................................................
+'.     Class Module Attributes definition
+'.................................................................................
+
+'---
+Private mElapsedTime As Double
+Private mTimerRunning As Boolean
+Private mCurrentBeginTime As Double
+
+'.................................................................................
+'.     Class Module Property Get definition
+'.................................................................................
+
+Friend Property Get ElapsedTime()
+    ElapsedTime = mElapsedTime
+End Property
+
+Friend Property Get TimerRunning()
+    TimerRunning = mTimerRunning
+End Property
+
+Friend Property Get CurrentBeginTime()
+    CurrentBeginTime = mCurrentBeginTime
+End Property
+
+
+
+'---
+Friend Property Get Elapsed_Time() As Double
+    Dim vExtra_time As Double: vExtra_time = 0#
+    
+    If mTimerRunning Then
+        vExtra_time = Timer - mCurrentBeginTime
+    End If
+    
+    Elapsed_Time = mElapsedTime + vExtra_time
+End Property
+
+
+'.................................................................................
+'.     Class Module Property Let definition
+'.................................................................................
+
+'---
+Property Let cWatch(vElapsedTime, vTimerRunning, vCurrentBeginTime)
+    mElapsedTime = vElapsedTime
+    mTimerRunning = vTimerRunning
+    mCurrentBeginTime = vCurrentBeginTime
+End Property
+
+
+
+'.................................................................................
+'.     Class Module Initialisation definition
+'.................................................................................
+
+'---
+Private Sub Class_Initialize()
+    mElapsedTime = 0#
+    mTimerRunning = False
+End Sub
+
+'.................................................................................
+'.     Class Module Functions definition
+'.................................................................................
+
+'---
+Friend Sub Start_Timer()
+    If Not mTimerRunning Then
+        mCurrentBeginTime = Timer
+        mTimerRunning = True
+    End If
+End Sub
+
+'---
+Friend Sub Stop_Timer()
+    If mTimerRunning Then
+        mElapsedTime = mElapsedTime + Timer - mCurrentBeginTime
+        mTimerRunning = False
+    End If
+End Sub
+
+'---
+Friend Sub Reset_Timer()
+    mElapsedTime = 0#
+    mTimerRunning = False
+End Sub
+
+'---
+Friend Sub Watch_Set(tWatch As cWatch)
+      Me.cWatch(tWatch.ElapsedTime(), tWatch.TimerRunning()) = tWatch.CurrentBeginTime()
+End Sub
+
