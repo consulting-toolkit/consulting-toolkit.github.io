@@ -1,0 +1,29 @@
+Environnement et contexte mission :
+
+Le service Alimentation et Marchés rassemble, au sein de la DSI Risque, les compétences de suivi des opérations de marché et de mesure des risques de marchés et contrepartie. Le service regroupe l’ensemble des travaux de maitrise d’ouvrage et de développement pour :
+-	la production d’indicateurs de risques de marché
+-	l’économétrie pour risques de marché et de contrepartie
+-	l’alimentation des systèmes de risques par les systèmes de gestion de la salle de marché
+
+L’équipe Econométrie constitue un pôle assurant la gestion des données de marché au sein de la DSI Risque, et en particulier dans la gestion des référentiels facteurs de risque et la génération des scenaris MonteCarlo de données diffusées pour les calculs de VaR, de CVA et EEPE.
+
+L’équipe économétrie est constituée 5 MOA et un MOE et souhaite palier au turnover naturel de l’équipe en recrutant un MOA.
+
+Description du projet :
+La mission est une prestation de maintenance et évolution des moteurs de diffusion de l’économétrie de CVA & EEPE portées par des besoins réglementaires type FRTB ou Beyeler.
+
+Description de la prestation
+Intégré au sein de l’équipe, le prestataire devra être autonome et se présenter comme le référent de l’équipe sur la partie Econométrie Amerisc.
+
+Travaillant en mode projet - environnement Agile, il devra aussi être capable de répondre rapidement aux sollicitations de son équipe dans le cas de bug/support de PROD.
+
+Le consultant devra aussi être amené à travailler sur différentes tâches de maintenance corrective et évolutive comme l’ensemble de l’équipe.
+
+Nous ciblons en priorité un intervenant MOA de 10 ans d’expérience disposant :
+- d’une solide culture des produits financiers et données de marché
+- d’expériences en maitrise d’ouvrage sur des projets en BFI 
+- de connaissances mathématiques en calcul matriciel et statistiques.
+- de connaissances sur les indicateurs réglementaires de risques marchés
+- de connaissances en langage Matlab et/ou R
+
+Au niveau de l’environnement technique, l’économétrie est en charge de différents scripts java & Matlab tournant dans un environnement Unix avec un système de stockage BigData (Hadoop). Des connaissances en manipulation de fichiers sous Unix sont attendues.
